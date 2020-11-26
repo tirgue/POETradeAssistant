@@ -1,3 +1,5 @@
 
 .POETradeAssistant_env/*
 .vscode/*
+*.pyc
+test.py

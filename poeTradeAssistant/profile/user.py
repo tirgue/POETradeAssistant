@@ -1,7 +1,7 @@
 import requests
 import json
-from poeTradeAssistant.profile.UserNotLoggedIn import UserNotLoggedIn
 from poeTradeAssistant.profile.character import Character
+from poeTradeAssistant.profile.exception import UserNotLoggedIn
 
 class User():
     def __init__(self, accountName, poesessid):
@@ -9,7 +9,7 @@ class User():
         self.poesessid = poesessid
         self.__retrieveCharacters__()
         for character in self.characters:
-            character.retrieveInventory(accountName, poesessid)
+            character.inventory.retrieveInventoryTabs(accountName, character.name, character.league, poesessid)
 
     def __retrieveCharacters__(self):
         url = "https://www.pathofexile.com/character-window/get-characters"
