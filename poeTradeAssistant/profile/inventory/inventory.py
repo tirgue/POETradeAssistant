@@ -37,4 +37,20 @@ class Inventory():
                 self.stashTabs.append(stashTab)
 
     def itemCount(self):
-        pass
+        counter = {}
+        allTabs = self.mainTab.itemsStack
+
+        for stashTab in self.stashTabs:
+            allTabs += stashTab.itemsStack
+
+        for itemStack in allTabs:
+            item = itemStack.item
+            count = itemStack.stackSize
+
+            if counter.get(item) == None:
+                counter[item] = count
+            
+            else:
+                counter[item] += count
+
+        return counter

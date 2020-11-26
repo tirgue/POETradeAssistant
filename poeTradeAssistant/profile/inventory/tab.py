@@ -7,7 +7,6 @@ class Tab():
     def __init__(self, width, height):
         self.width = width
         self.height = height
-        self.items = None
 
     # ABSTRACT
     def retrieveItems(self, accountName, poesessid):
@@ -33,11 +32,16 @@ class Tab():
                     stackSize = 1
                     maxStackSize = 1
 
+                try:
+                    x = item['x']
+                    y = item['y']
+
+                except :
+                    x = None
+                    y = None
+
                 icon = item['icon']
-                self.itemsStack.append(
-                    ItemStack(
-                        Item(name, typeLine, icon),
-                        stackSize,
-                        maxStackSize
-                    )
-                )
+
+                i = Item(name, typeLine, icon)
+                iStack = ItemStack(i, x, y, stackSize, maxStackSize)
+                self.itemsStack.append(iStack)

@@ -1,0 +1,21 @@
+from enum import Enum
+
+class Currency(Enum):
+    CHROM = "chrom"
+    ALT = "alt"
+    JEWEL = "jewel"
+    CHANCE = "chance"
+    CHISEL = "chisel"
+    FUSE = "fuse"
+    ALCH = "alch"
+    SCOUR = "scour"
+    BLESSED = "blessed"
+    CHAOS = "chaos"
+    REGRET = "regret"
+    REGAL = "regal"
+    GCP = "gcp"
+    DIVINE = "divine"
+    EXA = "exa"
+    MIRROR = "mirror"
+    PERANDUS = "perandus"
+    SILVER = "silver"
