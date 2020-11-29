@@ -2,7 +2,9 @@ import re
 import requests
 
 class Shop():
-    def __init__(self, shopId, text):
+    def __init__(self, shopId):
         self.shopId = shopId
-        self.text = text
-        
+        self.offers = []
+
+    def addOfffer(self, offer):
+        self.offers.append(offer)

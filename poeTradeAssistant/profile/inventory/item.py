@@ -23,3 +23,7 @@ class Item():
 
     def __hash__(self):
         return hash((self.name, self.type))
+
+    @staticmethod
+    def fromJSON(json):
+        return Item(json['name'], json['type'], json['icon'])

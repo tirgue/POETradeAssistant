@@ -1,8 +1,10 @@
 import requests
 import re
+import json
 import poeTradeAssistant.db as db
 from poeTradeAssistant.db import POESESSID
 from poeTradeAssistant.shop.shop import Shop
+from poeTradeAssistant.shop.offer import Offer
 
 def retrieveShop(shopId):
     url = f"https://www.pathofexile.com/forum/edit-thread/{shopId}"
@@ -17,14 +19,21 @@ def retrieveShop(shopId):
         raise Exception("POESESSID invalid")
 
     else:
-        match = re.search("\*\*\*DO NOT DELETE THAT LINE\*\*\*\n((.|\n)*)\*\*\*DO NOT DELETE THAT LINE\*\*\*", rep.text)
+        tag = "\*\*\*DO NOT EDIT MANUALLY\*\*\*"
+        match = re.search(f"{tag}\n((.|\n)*){tag}", rep.text)
 
         if match:
-            text = match.group(1)
+            body = match.group(1)
+            match = re.findall("({.*})", body)
 
-            shop = Shop(shopId, text)
+            if match:
+                shop = Shop(shopId)
 
-            return shop
+                for offer in match:
+                    offer = offer.replace("&#039;","\"")
+                    offer = json.loads(offer)
+                    shop.offers.append(Offer.fromJSON(offer))
 
-        else:
-            raise Exception("SHOPID invalid")
+                return shop
+
+        raise Exception("SHOPID invalid")
