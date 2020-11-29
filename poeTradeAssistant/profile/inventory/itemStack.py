@@ -5,6 +5,7 @@ class ItemStack():
         self.y = y
         self.stackSize = stackSize
         self.maxStackSize = maxStackSize
+        self.tab = None
 
     def getPosition(self):
         return (x, y)

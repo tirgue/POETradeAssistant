@@ -20,7 +20,7 @@ def retrieveShop(shopId):
 
     else:
         tag = "\*\*\*DO NOT EDIT MANUALLY\*\*\*"
-        match = re.search(f"{tag}\n((.|\n)*){tag}", rep.text)
+        match = re.search(f"{tag}\n((.|\n)*){tag}\n", rep.text)
 
         if match:
             body = match.group(1)
@@ -32,7 +32,9 @@ def retrieveShop(shopId):
                 for offer in match:
                     offer = offer.replace("&#039;","\"")
                     offer = json.loads(offer)
-                    shop.offers.append(Offer.fromJSON(offer))
+                    offer = Offer.fromJSON(offer)
+                    offer.shop = shop
+                    shop.offers.append(offer)
 
                 return shop
 

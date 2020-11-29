@@ -25,7 +25,13 @@ def retrieveTab(main, character = "", league = "", index = ""):
         raise Exception("POESESSID invalid")
 
     else:
-        itemStacks = []
+
+        if main:
+            tab = MainTab()
+
+        else:
+            tab = StashTab(index)
+
         items = rep['items']
         for item in items:
             name = item['name']
@@ -50,10 +56,6 @@ def retrieveTab(main, character = "", league = "", index = ""):
 
             i = Item(name, typeLine, icon)
             iStack = ItemStack(i, x, y, stackSize, maxStackSize)
-            itemStacks.append(iStack)
+            tab.addItemStack(iStack)
 
-            if main:
-                return MainTab(itemStacks)
-
-            else:
-                return StashTab(i, itemStacks)
+        return tab        

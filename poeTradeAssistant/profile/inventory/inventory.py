@@ -24,3 +24,14 @@ class Inventory():
                 counter[item] += count
 
         return counter
+
+    def findMainTab(self, item):
+        return self.mainTab.find(item)
+
+    def findStashTabs(self, item):
+        result = []
+        for tab in self.stashTabs:
+            result += tab.find(item)
+
+        return result
+        
