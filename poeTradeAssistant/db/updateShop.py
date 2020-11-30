@@ -1,4 +1,3 @@
-import requests
 import poeTradeAssistant.db as db
 
 def updateShop(shop):

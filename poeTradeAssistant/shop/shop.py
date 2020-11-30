@@ -13,12 +13,12 @@ class Shop():
         offer.shop = self
 
     def embed(self):
-        tag = "***DO NOT EDIT MANUALLY***\n"
+        tag = "***DO NOT EDIT MANUALLY***\n\n"
         result = tag
         for offer in self.offers:
             result += offer.embed()
 
-        result += "\n" + tag
+        result += tag
         return result
         
     def update(self):

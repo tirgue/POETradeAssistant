@@ -1,4 +1,3 @@
-import requests
 import json
 import poeTradeAssistant.db as db
 from ..profile.inventory.item import Item
