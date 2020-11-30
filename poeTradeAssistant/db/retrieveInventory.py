@@ -10,12 +10,7 @@ def retrieveInventory(character, league):
     mainTab = retrieveTab(True, character, league)
     stashTabs = []
     url = f"https://www.pathofexile.com/character-window/get-stash-items?league={league}&accountName={db.ACCOUNT_NAME}&tabs=0&tabIndex=0"
-    rep = requests.get(
-        url = url,
-        headers={
-            "cookie": "POESESSID=" + db.POESESSID
-        }
-    )
+    rep = db.SESSION.get(url)
 
     rep = json.loads(rep.text)
 

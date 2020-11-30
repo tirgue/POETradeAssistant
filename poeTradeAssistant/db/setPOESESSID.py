@@ -1,4 +1,4 @@
 import poeTradeAssistant.db as db
 
 def setPOESESSID(poesessid):
-    db.POESESSID = poesessid
+    db.SESSION.headers.update({'cookie':'POESESSID='+poesessid})

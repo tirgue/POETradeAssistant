@@ -2,18 +2,12 @@ import requests
 import re
 import json
 import poeTradeAssistant.db as db
-from poeTradeAssistant.db import POESESSID
 from poeTradeAssistant.shop.shop import Shop
 from poeTradeAssistant.shop.offer import Offer
 
 def retrieveShop(shopId):
     url = f"https://www.pathofexile.com/forum/edit-thread/{shopId}"
-    rep = requests.get(
-        url = url,
-        headers={
-            "cookie": "POESESSID=" + db.POESESSID
-        }
-    )       
+    rep = db.SESSION.get(url)       
 
     if rep.status_code != 200:
         raise Exception("POESESSID invalid")
@@ -27,7 +21,8 @@ def retrieveShop(shopId):
             match = re.findall("({.*})", body)
 
             if match:
-                shop = Shop(shopId)
+                shopHash = re.search('<input type="hidden" name="hash" value="(.*)">', rep.text)
+                shop = Shop(shopId, shopHash.group(1))
 
                 for offer in match:
                     offer = offer.replace("&#039;","\"")

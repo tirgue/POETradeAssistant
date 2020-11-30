@@ -1,12 +1,14 @@
 import re
 import requests
+from poeTradeAssistant.db.updateShop import updateShop
 
 class Shop():
-    def __init__(self, shopId):
+    def __init__(self, shopId, shopHash):
         self.shopId = shopId
+        self.shopHash = shopHash
         self.offers = []
 
-    def addOfffer(self, offer):
+    def addOffer(self, offer):
         self.offers.append(offer)
         offer.shop = self
 
@@ -19,3 +21,6 @@ class Shop():
         result += "\n" + tag
         return result
         
+    def update(self):
+        updateShop(self)
+

@@ -12,12 +12,7 @@ def retrieveTab(main, character = "", league = "", index = ""):
     else:
         url = f"https://www.pathofexile.com/character-window/get-stash-items?league={league}&accountName={db.ACCOUNT_NAME}&tabs=0&tabIndex={index}"
     
-    rep = requests.get(
-        url = url,
-        headers={
-            "cookie": "POESESSID=" + db.POESESSID
-        }
-    )
+    rep = db.SESSION.get(url)
 
     rep = json.loads(rep.text)
 

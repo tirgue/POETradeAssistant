@@ -5,12 +5,7 @@ from poeTradeAssistant.profile import Character
 
 def retrieveCharacters():
     url = "https://www.pathofexile.com/character-window/get-characters"
-    rep = requests.get(
-        url,
-        headers = {
-            "cookie" : "POESESSID=" + db.POESESSID
-        }
-    )
+    rep = db.SESSION.get(url)
 
     rep = json.loads(rep.text)
 
